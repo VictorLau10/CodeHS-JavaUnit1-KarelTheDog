@@ -1,0 +1,44 @@
+public class TwoTowersKarel extends Karel
+{
+	public void run()
+	{
+		move();
+		buildTower();
+		getDown();
+		move();
+		move();
+		buildTower();
+	}
+	
+	private void buildTower()
+	{
+	    turnLeft();
+	    
+	    putBall();
+	    move();
+	    
+	    putBall();
+	    move();
+	    
+	    putBall();
+	    move();
+	    
+	    turnRight();
+	}
+	
+	private void getDown()
+	{
+	    turnRight();
+	    move();
+	    move();
+	    move();
+	    turnLeft();
+	}
+	
+	private void turnRight()
+	{
+	    turnLeft();
+	    turnLeft();
+	    turnLeft();
+	}
+}
