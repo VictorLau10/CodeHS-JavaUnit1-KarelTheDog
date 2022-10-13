@@ -1,0 +1,47 @@
+public class KarelProgram extends SuperKarel
+{
+    public void run()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            putInPosition();
+            turnLeft();
+            putInPosition();
+            makeFlower();
+            getDown();
+        }
+    }
+    
+    private void putInPosition()
+    {
+        move();
+        move();
+        move();
+    }
+    
+    private void makeFlower()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            putBall();
+            move();
+            turnRight();
+        }
+        putBall();
+    }
+    
+    private void getDown()
+    {
+        turnLeft();
+        putInPosition();
+        turnLeft();
+    }
+    
+    
+    private void turnRight()
+    {
+        turnLeft();
+        turnLeft();
+        turnLeft();
+    }
+}
