@@ -1,0 +1,54 @@
+// This program has Karel build two towers
+
+public class TwoTowersKarel extends SuperKarel
+{
+	public void run()
+	{
+		move();
+		buildTower();
+		getDown();
+		move();
+		move();
+		buildTower();
+	}
+	
+	/* This method makes Karel build a tower 3
+	 * circles high.
+	 * Precondition: Karel is at the bottom of where the
+	 * tower is planned to be built.
+	 * Postcondition: Karel is at the top of the tower
+	 * facing east.
+	 */
+	private void buildTower()
+	{
+	    turnLeft();
+	    
+	    putBall();
+	    move();
+	    
+	    putBall();
+	    move();
+	    
+	    putBall();
+	    move();
+	    
+	    turnRight();
+	}
+	
+	/* This method makes Karel get down from the tower
+	 * Precondition: Karel is at the top of the tower
+	 * facing east.
+	 * Postcondition: Karel is at the bottom of the tower
+	 * facing east.
+	 */
+	private void getDown()
+	{
+	    turnRight();
+	    move();
+	    move();
+	    move();
+	    turnLeft();
+	}
+	
+	// This method gets Karel to turn right
+}
