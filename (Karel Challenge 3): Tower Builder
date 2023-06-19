@@ -1,0 +1,40 @@
+public class TowerBuilderKarel extends SuperKarel
+{
+    public void run()
+    {
+        // Takes in account even and odd amount of columns
+        buildTower();
+        while (frontIsClear())
+        {
+            move();
+            if (frontIsClear())
+            {
+                move();
+                buildTower();
+            }
+        }
+    }
+    
+    // Builds a tower on the spot
+    private void buildTower()
+    {
+        turnLeft();
+        for (int i = 0; i < 3; i++)
+        {
+            putBall();
+            move();
+        }
+        returnToGround();
+    }
+    
+    // Returns Karel to the ground
+    private void returnToGround()
+    {
+        turnAround();
+        for (int i = 0; i < 3; i++)
+        {
+            move();
+        }
+        turnLeft();
+    }
+}
