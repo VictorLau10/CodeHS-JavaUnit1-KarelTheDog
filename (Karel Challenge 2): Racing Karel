@@ -1,0 +1,27 @@
+public class RacingKarel extends SuperKarel
+{
+    public void run()
+    {
+        for (int i = 0; i < 32; i++)
+        {
+            while (frontIsClear())
+            {
+                move();
+            }
+            reachedCorner();
+        }
+    }
+    
+    // What Karel does when they reach a corner
+    private void reachedCorner()
+    {
+        putBall();
+        turnLeft();
+    }
+    
+    // Why do I need to use three methods when I only needed one
+    private void moving()
+    {
+        move();
+    }
+}
