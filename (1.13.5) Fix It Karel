@@ -1,0 +1,50 @@
+public class KarelProgram extends Karel
+{
+    public void run()
+    {
+        checkHoles();
+        while (frontIsClear())
+        {
+            move();
+            checkHoles();
+        }
+    }
+    
+    private void checkHoles()
+    {
+        if (leftIsBlocked())
+        {
+            // Left and right are both blocked
+            if (rightIsBlocked())
+            {
+                putBall();
+            } else {
+                // Left is blocked but right is clear
+                putBall();
+                putBall();
+            }
+        }
+        
+        if (rightIsBlocked()) 
+        {
+            if (leftIsClear())
+            {
+                // Right is blocked but left is clear
+                putBall();
+                putBall();
+            }
+        }
+        
+        // Left and right are both clear
+        if (leftIsClear())
+        {
+            if (rightIsClear())
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    putBall();
+                }
+            }
+        }
+    }
+}
