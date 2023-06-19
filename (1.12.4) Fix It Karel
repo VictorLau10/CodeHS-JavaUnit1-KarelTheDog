@@ -1,0 +1,27 @@
+public class KarelProgram extends SuperKarel
+{
+    public void run()
+    {
+        while(frontIsClear())
+        {
+            placeBalls();
+            move();
+        }
+        placeBalls();
+    }
+    
+    private void placeBalls()
+    {
+        if (leftIsClear())
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                putBall();
+            }
+        } 
+        else 
+        {
+            putBall();
+        }
+    }
+}
