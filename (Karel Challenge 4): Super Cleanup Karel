@@ -1,0 +1,64 @@
+public class SuperCleanupKarel extends SuperKarel
+{
+    public void run()
+    {
+        checkBalls();
+        while (leftIsClear()) 
+        {
+            clearRow();
+        }
+        // When Karel reaches the top row, do it once more
+        moveToWall();
+        returnToBeginning();
+    }
+    
+    /* Clears a row and makes Karel go up one row if there is
+     * one available. 
+     */
+    
+    private void clearRow()
+    {
+        moveToWall();
+        turnAround();
+        moveToWall();
+        turnRight();
+        checkBalls();
+        if (frontIsClear())
+        {
+            move();
+        } 
+        turnRight();
+    }
+    
+    // Makes Karel move to a wall while checking for balls
+    private void moveToWall()
+    {
+        while (frontIsClear())
+        {
+            move();
+            checkBalls();
+        }
+    }
+    
+    // If there is a ball, Karel picks it up
+    private void checkBalls()
+    {
+        if (ballsPresent())
+        {
+            takeBall();
+        }
+    }
+    
+    /* Makes Karel go down the right side and then the bottom to
+     * get to his original position
+     */
+    private void returnToBeginning()
+    {
+        checkBalls();
+        turnRight();
+        moveToWall();
+        turnRight();
+        moveToWall();
+        turnAround();
+    }
+}
