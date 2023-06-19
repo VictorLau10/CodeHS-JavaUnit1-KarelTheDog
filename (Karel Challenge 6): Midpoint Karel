@@ -1,0 +1,157 @@
+/* hi mr. cohen
+ *
+ * Midpoint Karel
+ * This program completes the task by filling the bottom
+ * row and gathering all those balls into the bottom-left
+ * corner to count how many columns there are. Then, it 
+ * makes one ball to the right of the stack for every two balls 
+ * in the stack, which creates half the amount. After removing 
+ * the indicator balls and moving to the end of the line of balls, 
+ * Karel will be at the midpoint.
+ */
+
+public class MidpointKarel extends SuperKarel
+{
+    public void run()
+    {
+        fillRow();
+        gatherBalls();
+        reposition();
+        moveHalf();
+        cleanUp();
+        adjust();
+        
+        // Adjusts for 1x1 world
+        if (leftIsBlocked())
+        {
+            turnAround();
+        }
+    }
+    
+    // Fills the bottom row with balls
+    private void fillRow()
+    {
+        while(frontIsClear())
+        {
+            move();
+            putBall();
+        }
+    }
+    
+    /* Moves Karel back to the bottom-left corner 
+     * facing east
+     */
+    private void reposition()
+    {
+        turnAround();
+        moveToEnd();
+        turnAround();
+        
+        // Includes the 1st additional column to the stack
+        putBall();
+    }
+    
+    /* Returns all balls to the first column (1, 1), which 
+     * will indicate how many columns there are in total.
+     */
+    private void gatherBalls()
+    {
+        turnAround();
+        while (ballsPresent())
+        {
+            takeBall();
+            moveToEnd();
+            putBall();
+            turnAround();
+            while (ballsPresent())
+            {
+                move();
+            }
+            turnAround();
+            move();
+            
+            /* Moves Karel out of the first column at the end
+             * to break the loop
+             */
+            if(frontIsBlocked())
+            {
+                turnAround();
+                move();
+            }
+        }
+    }
+    
+    private void moveHalf()
+    {
+        while (ballsPresent())
+        {
+            // For every two balls, add another one in the row
+            takeBall();
+            /* If by the end of the stack, the number of balls 
+             * in the stack is even, take another ball
+             */
+            if (ballsPresent())
+            {
+                takeBall();
+            }
+            
+            // Moves to the next spot without a ball and places one
+            while (ballsPresent())
+            {
+                moveIfPossible();
+            }
+            
+            // Checks if Karel is in the first column
+            turnAround();
+            if (frontIsClear())
+            {
+                putBall();
+            }
+            
+            moveToEnd();
+            turnAround();
+        }
+    }
+    /* Gets rid of all unnecessary indicator balls 
+     * and repositions Karel to the midpoint
+     */
+    private void cleanUp()
+    {
+        moveIfPossible();
+        while(ballsPresent())
+        {
+            takeBall();
+            move();
+        }
+    }
+    
+    /* Because Karel moves until there isn't a ball, Karel will
+     * be one space past the middle. This brings Karel back to the
+     * real midpoint.
+     */
+    private void adjust()
+    {
+        turnAround();
+        moveIfPossible();
+        turnAround();
+        putBall();
+    }
+    
+    // Moves Karel to a wall without being able to crash
+    private void moveToEnd()
+    {
+        while (frontIsClear())
+        {
+            move();
+        }
+    }
+    
+    // Moves Karel safely and prevents crashing into walls
+    private void moveIfPossible()
+    {
+        if (frontIsClear())
+        {
+            move();
+        }
+    }
+}
