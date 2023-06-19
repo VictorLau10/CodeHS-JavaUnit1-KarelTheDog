@@ -1,0 +1,51 @@
+public class DoubleTennisBallsKarel extends SuperKarel
+{
+    public void run()
+    {
+        move();
+        moveStack();
+        move();
+        doubleStack();
+        returnToPosition();
+    }
+    
+    // Move the stack one column to the right
+    private void moveStack()
+    {
+        while (ballsPresent())
+        {
+            takeBall(); 
+            move();
+            putBall();
+            turnAround();
+            move();
+            turnAround();
+        }
+    }
+    
+    /* Move the stack back to its original column (1 to the left),
+     * and add two for each ball it takes
+     */
+    private void doubleStack()
+    {
+         while (ballsPresent())
+         {
+             turnAround();
+             takeBall();
+             move();
+             putBall();
+             putBall();
+             turnAround();
+             move();
+         }
+    }
+    
+    // Returns Karel to the original position
+    private void returnToPosition()
+    {
+        turnAround();
+        move();
+        move();
+        turnAround();
+    }
+}
